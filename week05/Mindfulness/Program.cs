@@ -1,69 +1,51 @@
 using System;
-using System.Threading;
 
-public class Activity
+class Program
 {
-    protected string _name;
-    protected string _description;
-    protected int _duration;
-
-    public Activity()
+    static void Main(string[] winners)
     {
-        _name = "Activity";
-        _description = "Base activity description.";
-        _duration = 0;
-    }
+        bool keepRunning = true;
 
-    public void DisplayStartingMessage()
-    {
-        Console.Clear();
-        Console.WriteLine($"Welcome to the {_name}.\n");
-        Console.WriteLine($"{_description}\n");
-        Console.Write("How long, in seconds, would you like for your session? ");
-        _duration = int.Parse(Console.ReadLine());
-        Console.Clear();
-        Console.WriteLine("Get ready...");
-        ShowSpinner(3);
-        Console.WriteLine();
-    }
-
-    public void DisplayEndingMessage()
-    {
-        Console.WriteLine("\nWell done!!");
-        ShowSpinner(3);
-        Console.WriteLine($"You have completed another {_duration} seconds of the {_name}.");
-        ShowSpinner(3);
-    }
-
-    public void ShowSpinner(int seconds)
-    {
-        List<string> animationStrings = new List<string> { "|", "/", "-", "\\" };
-        
-        DateTime startTime = DateTime.Now;
-        DateTime endTime = startTime.AddSeconds(seconds);
-
-        int i = 0;
-        while (DateTime.Now < endTime)
+        while (keepRunning)
         {
-            string s = animationStrings[i];
-            Console.Write(s);
-            Thread.Sleep(250);
-            Console.Write("\b \b");
-            i++;
-            if (i >= animationStrings.Count)
+            Console.Clear();
+            Console.WriteLine("Menu Options:");
+            Console.WriteLine("  1. Start breathing activity");
+            Console.WriteLine("  2. Start reflecting activity");
+            Console.WriteLine("  3. Start listing activity");
+            Console.WriteLine("  4. Quit");
+            Console.Write("Select a choice from the menu: ");
+
+            string choice = Console.ReadLine();
+
+            switch (choice)
             {
-                i = 0;
-            }
-        }
-    }
+                case "1":
+                    BreathingActivity breathing = new BreathingActivity();
+                    
+                    break;
 
-    public void ShowCountDown(int seconds)
-    {
-        for (int i = seconds; i > 0; i--)
-        {
-            Console.Write(i);
-            Thread.Sleep(1000);
-            Console.Write("\b \b");
+                case "2":
+                    ReflectingActivity reflecting = new ReflectingActivity();
+                    reflecting.Run();
+                    break;
+
+                case "3":
+                    ListingActivity listing = new ListingActivity();
+                    listing.Run();
+                    break;
+
+                case "4":
+                    keepRunning = false;
+                    Console.Clear();
+                    Console.WriteLine("Goodbye!");
+                    break;
+
+                default:
+                    Console.WriteLine("\nInvalid option. Please enter 1-4.");
+                    Thread.Sleep(2000);
+                    break;
+            }
         }
     }
 }
