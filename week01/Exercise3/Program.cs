@@ -43,13 +43,18 @@ class Program
                 Console.WriteLine("You guessed it!");
             }
 
+           
+            
+            
+
+ 
+            
+
+        }
+
+        {
             Console.WriteLine($"it took you {guessCount} guesses");
-            
-            
-
-
-            
-
-        }                    
+        }                   
     }
 }
+
