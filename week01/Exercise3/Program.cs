@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 
 class Program
 {
@@ -29,11 +30,23 @@ class Program
             {
                 Console.WriteLine("Lower");
             }
+            if (magicNumber != guess)
+            {
+                guessCount = guessCount + 1;
+                
+                
+            }
+
             
             else
             {
                 Console.WriteLine("You guessed it!");
             }
+
+            Console.WriteLine($"it took you {guessCount} guesses");
+            
+            
+
 
             
 
